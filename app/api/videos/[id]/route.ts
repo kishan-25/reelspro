@@ -7,22 +7,22 @@ export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const id = (await params).id;
+  const id = params.id;
   
   try {
     await connectToDatabase();
-
+    
     // Validate ObjectId
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return NextResponse.json({ error: "Invalid video ID" }, { status: 400 });
     }
-
+    
     const video = await Video.findById(id).lean();
-
+    
     if (!video) {
       return NextResponse.json({ error: "Video not found" }, { status: 404 });
     }
-
+    
     return NextResponse.json(video);
   } catch (error) {
     console.error("Error fetching video:", error);
@@ -37,7 +37,7 @@ export async function PUT(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const id = (await params).id;
+  const id = params.id;
   
   try {
     await connectToDatabase();
@@ -71,7 +71,7 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const id = (await params).id;
+  const id = params.id;
   
   try {
     await connectToDatabase();
