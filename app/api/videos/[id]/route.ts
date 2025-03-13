@@ -3,14 +3,11 @@ import { connectToDatabase } from "@/lib/db";
 import Video from "@/models/Video";
 import mongoose from "mongoose";
 
-// The correct type definition for route parameters in Next.js App Router
-type RouteParams = { params: { id: string } };
-
 export async function GET(
   request: NextRequest,
-  { params }: RouteParams
+  context: { params: { id: string } }
 ) {
-  const id = params.id;
+  const id = context.params.id;
   
   try {
     await connectToDatabase();
@@ -38,9 +35,9 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: RouteParams
+  context: { params: { id: string } }
 ) {
-  const id = params.id;
+  const id = context.params.id;
   
   try {
     await connectToDatabase();
@@ -72,9 +69,9 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: RouteParams
+  context: { params: { id: string } }
 ) {
-  const id = params.id;
+  const id = context.params.id;
   
   try {
     await connectToDatabase();
